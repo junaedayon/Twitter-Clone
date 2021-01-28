@@ -49,7 +49,7 @@ getTwitterData();
 const saveNextPage = (metadata) => {
     if(metadata.next_results) {
 
-     nextPageUrl = `${URL}${metadata.next_results}`;
+     nextPageUrl = `${URL}tweets${metadata.next_results}`;
     } else {
         nextPageUrl = null;
     }
