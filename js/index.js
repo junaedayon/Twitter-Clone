@@ -1,4 +1,4 @@
-const URL = "http://localhost:3000/tweets";
+const URL = "https://twitter-clone-ok.herokuapp.com/";
 
 
 let nextPageUrl = null ;
@@ -24,14 +24,19 @@ const getTwitterData = (nextPagee=false) => {
     if(!query) return;
 
     const enCodedQuery = encodeURIComponent(query);
-      
-    let fullUrl = `${URL}?q=${enCodedQuery}&count=10`;
+        
+    let fullUrl = `${URL}tweets?q=${enCodedQuery}&count=10`;
       if (nextPagee && nextPageUrl) {
           fullUrl = nextPageUrl
       }
      fetch(fullUrl).then((response) => {
-           return response.json();
+         console.log(response)
+           if(response.ok) {
+            return response.json();
+           }
+           
       }).then((data) => {
+          console.log("Data>>>", data)
            buildTweets(data.statuses, nextPagee);
            saveNextPage(data.search_metadata);
            nextPageButtonVisibility(data.search_metadata);
